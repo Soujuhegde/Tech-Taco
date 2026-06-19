@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-50: #f0fdfa;
+  --color-primary-100: #ccfbf1;
+  --color-primary-200: #99f6e4;
+  --color-primary-300: #5eead4;
+  --color-primary-400: #2dd4bf;
+  --color-primary-500: #14b8a6;
+  --color-primary-600: #0d9488;
+  --color-primary-700: #0f766e;
+  
+  --color-accent-500: #e11d48;
+  --color-accent-600: #be123c;
+}
+
+body {
+  @apply text-slate-100 antialiased;
+  background-color: transparent;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Glassmorphism Utilities to match the Hacker Matrix aesthetic */
+.glass-panel {
+  @apply bg-[#020617]/80 backdrop-blur-xl border border-emerald-500/30 shadow-[0_0_40px_rgba(16,185,129,0.15)];
+}
+
+.glass-card {
+  @apply bg-[#020617]/80 backdrop-blur-md border border-emerald-400/20 shadow-2xl;
+}
+
+.glass-button {
+  @apply relative overflow-hidden bg-gradient-to-r from-emerald-600/80 to-emerald-800/80 backdrop-blur-md text-white border border-emerald-400/50 shadow-[0_0_15px_rgba(16,185,129,0.4)] hover:shadow-[0_0_25px_rgba(16,185,129,0.6)] hover:scale-105 transition-all duration-300;
+}
+
+/* Card flip animation for Memory Match */
+.perspective-1000 {
+  perspective: 1000px;
+}
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+}
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
