@@ -53,14 +53,34 @@ class WriterAgent:
         )
 
         prompt = (
-            "You are an AI news writer. Write a ~400-word blog post in markdown "
-            "with an engaging title, covering this story:\n\n"
-            f"Title: {article.title}\nSummary: {article.summary}\nSource: {article.link}\n\n"
+            "You are an experienced journalist, blogger, and editor writing for a human audience.\n"
+            "Your task is to transform the source article into a compelling, human-written blog post or daily briefing.\n\n"
+            "Requirements:\n"
+            "1. DO NOT write like an AI summarizer. Avoid generic phrases ('The article discusses', 'In conclusion').\n"
+            "2. Write with a natural human voice. Sound thoughtful, curious, and conversational. Allow personality.\n"
+            "3. Focus on WHY the story matters. Explain implications, trade-offs, and real-world relevance.\n"
+            "4. Include specificity. Mention concrete examples from the source. Avoid vague philosophy.\n"
+            "5. Create variation in sentence length and structure.\n"
+            "6. Add a human-curated perspective: provide a brief interpretation ('What stood out to me').\n"
+            "7. Do not sound overly formal or academic.\n\n"
+            "Output Format (Markdown):\n"
+            "# Headline\n"
+            "## Why This Story Matters\n"
+            "(2-3 engaging paragraphs)\n"
+            "## Key Insight\n"
+            "(Explain the central idea in a clear, human way)\n"
+            "## Real-World Impact\n"
+            "(Discuss practical implications)\n"
+            "## Curator's Take\n"
+            "(A short personal interpretation, observation, or thought-provoking question)\n\n"
+            "The final result should feel like it was written by a thoughtful human editor.\n\n"
+            "--- STORY TO COVER ---\n"
+            f"Title: {article.title}\nSummary: {article.summary}\nSource: {article.link}\n"
             f"Why this story was chosen: {selection.reason}\n{context_note}\n\n"
-            "Also write a separate short Mastodon post or thread (max 500 characters, plain text, no "
-            "markdown) with relevant hashtags.\n\n"
-            'Return ONLY valid JSON exactly like this example:\n'
-            '{"title": "Awesome Title", "body_markdown": "Full text here", "mastodon_post": "Social post here"}'
+            "--- INSTRUCTIONS ---\n"
+            "Also write a separate short Mastodon post (max 500 characters, plain text) with relevant hashtags.\n\n"
+            "Return ONLY valid JSON exactly like this example (do not wrap in markdown blocks like ```json):\n"
+            '{"title": "Awesome Title", "body_markdown": "Full markdown text here", "mastodon_post": "Social post here"}'
         )
 
         response = self._client.chat.completions.create(
