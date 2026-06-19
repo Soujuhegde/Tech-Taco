@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+.pytest_cache/
+*.egg-info/
+
+# IMPORTANT: data/chroma_db is intentionally NOT ignored.
+# It's the agent's persistent memory of past posts, committed back to the
+# repo by the GitHub Actions workflow so it survives across ephemeral CI
+# runs without needing a paid hosted vector DB. See README "Persistence".
