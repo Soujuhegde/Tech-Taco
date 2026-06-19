@@ -2,10 +2,6 @@
 
 An autonomous, full-stack AI agent that acts as your personal tech journalist. Powered by **Sarvam AI**, **FastAPI**, and **React**, it automatically fetches hundreds of news articles, curates the most exciting story of the day using a multi-agent LangGraph pipeline, and publishes beautifully formatted blog posts to Mastodon and Dev.to.
 
-Complete with a stunning **Hacker Matrix** dark-mode dashboard!
-
----
-
 ## 🏗 Architecture
 
 The project is split into a Python FastAPI backend and a React (Vite + Tailwind) frontend.
@@ -22,8 +18,6 @@ A cinematic, premium dark-mode dashboard featuring:
 - Glassmorphism UI components.
 - A "Memory Match" mini-game loading screen while the AI agent runs in the background.
 - Pixel-perfect social media mockups to preview the Dev.to and Mastodon posts before they go live.
-
----
 
 ## 🚀 Step-by-Step Setup Guide
 
@@ -85,7 +79,6 @@ npm run dev
 ### 6. Run the Agent
 Open your browser to `http://localhost:5173`. Click **"Get Today's Story"** and watch the AI agent work its magic!
 
----
 
 ## 💸 Cost Breakdown
 - **RSS Feeds:** $0
