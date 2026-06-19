@@ -1,4 +1,4 @@
-# Tech-Taco AI News Agent 🌮🤖
+# The Daily AI Brief -  AI News Agent 🌮🤖
 
 An autonomous, full-stack AI agent that acts as your personal tech journalist. Powered by **Sarvam AI**, **FastAPI**, and **React**, it automatically fetches hundreds of news articles, curates the most exciting story of the day using a multi-agent LangGraph pipeline, and publishes beautifully formatted blog posts to Mastodon and Dev.to.
 
