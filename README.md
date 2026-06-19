@@ -161,3 +161,6 @@ Open your browser to `http://localhost:5173`. Click **"Get Today's Story"** and 
 - **Database:** ChromaDB (Local Vector Store)
 - **Backend:** Python, FastAPI, Uvicorn
 - **Frontend:** React, Vite, Tailwind CSS v4
+
+## Author 
+Soujanya S P 
