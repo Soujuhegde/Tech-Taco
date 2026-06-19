@@ -2,6 +2,12 @@
 
 An autonomous, full-stack AI agent that acts as your personal tech journalist. Powered by **Sarvam AI**, **FastAPI**, and **React**, it automatically fetches hundreds of news articles, curates the most exciting story of the day using a multi-agent LangGraph pipeline, and publishes beautifully formatted blog posts to Mastodon and Dev.to.
 
+## 📸 Frontend Preview
+
+<p align="center">
+  <img src="assets/dashboard.png" alt="Tech-Taco Dashboard" width="900"/>
+</p>
+
 ## 🏗 Architecture
 
 Here is the high-level architecture diagram showing the data flow from the React frontend, through the AI agents, to the external publishers and memory store:
