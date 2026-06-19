@@ -4,6 +4,69 @@ An autonomous, full-stack AI agent that acts as your personal tech journalist. P
 
 ## 🏗 Architecture
 
+Here is the high-level architecture diagram showing the data flow from the React frontend, through the AI agents, to the external publishers and memory store:
+
+```mermaid
+flowchart TD
+    subgraph Frontend [React + Vite Frontend]
+        UI["Hacker Matrix Dashboard"]
+    end
+
+    subgraph Backend [FastAPI Backend]
+        API["api.py (/api/run-agent)"]
+        
+        subgraph Pipeline [LangGraph AI Pipeline]
+            Fetcher["News Fetcher"]
+            Curator["Curator Agent"]
+            Writer["Writer Agent"]
+            Publishers["Publishers"]
+        end
+    end
+
+    subgraph External [External Services]
+        RSS["RSS Feeds"]
+        Sarvam["Sarvam AI LLM"]
+        DevTo["Dev.to API"]
+        Mastodon["Mastodon API"]
+    end
+
+    subgraph Database [Local Storage]
+        Chroma[("ChromaDB Vector Store")]
+    end
+
+    %% Flow connections
+    UI -- "1. Trigger Run" --> API
+    API -- "2. Start Graph" --> Fetcher
+    
+    Fetcher -- "3. Fetch articles" --> RSS
+    Fetcher -- "4. Pass Candidates" --> Curator
+    
+    Curator -- "5. Check Novelty" <--> Chroma
+    Curator -- "6. Pick Best Story" <--> Sarvam
+    Curator -- "7. Pass Selected Story" --> Writer
+    
+    Writer -- "8. Draft Blogs & Socials" <--> Sarvam
+    Writer -- "9. Pass Drafts" --> Publishers
+    
+    Publishers -- "10. Publish Article" --> DevTo
+    Publishers -- "11. Publish Post" --> Mastodon
+    Publishers -- "12. Save Memory" --> Chroma
+    
+    Publishers -- "13. Return Results" --> API
+    API -- "14. Display Data" --> UI
+
+    %% Styling
+    classDef frontend fill:#0f172a,stroke:#10b981,stroke-width:2px,color:#fff;
+    classDef backend fill:#0f172a,stroke:#3b82f6,stroke-width:2px,color:#fff;
+    classDef external fill:#1e1b4b,stroke:#a855f7,stroke-width:2px,color:#fff;
+    classDef database fill:#450a0a,stroke:#ef4444,stroke-width:2px,color:#fff;
+
+    class UI frontend;
+    class API,Fetcher,Curator,Writer,Publishers backend;
+    class RSS,Sarvam,DevTo,Mastodon external;
+    class Chroma database;
+```
+
 The project is split into a Python FastAPI backend and a React (Vite + Tailwind) frontend.
 
 ### 1. The Backend (Python + FastAPI)
