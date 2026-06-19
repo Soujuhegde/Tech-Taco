@@ -1,0 +1,45 @@
+name: Daily AI News Post
+
+on:
+  schedule:
+    - cron: "30 3 * * *"   # 9:00 AM IST (UTC+5:30) — adjust for your timezone
+  workflow_dispatch: {}     # lets you trigger a run manually from the Actions tab
+
+permissions:
+  contents: write           # needed to commit the updated vector memory back
+
+jobs:
+  run-agent:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run agent
+        run: python main.py
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          DEVTO_API_KEY: ${{ secrets.DEVTO_API_KEY }}
+          LINKEDIN_CLIENT_ID: ${{ secrets.LINKEDIN_CLIENT_ID }}
+          LINKEDIN_CLIENT_SECRET: ${{ secrets.LINKEDIN_CLIENT_SECRET }}
+          LINKEDIN_REFRESH_TOKEN: ${{ secrets.LINKEDIN_REFRESH_TOKEN }}
+          LINKEDIN_PERSON_URN: ${{ secrets.LINKEDIN_PERSON_URN }}
+          RSS_FEEDS: ${{ vars.RSS_FEEDS }}
+
+      # "git as a free database": ChromaDB writes to ./data/chroma_db on the
+      # runner's local disk, which is wiped at the end of every job. Committing
+      # it back is what lets tomorrow's run remember today's post without
+      # paying for a hosted vector DB.
+      - name: Persist vector memory back to the repo
+        run: |
+          git config user.name "ai-news-agent-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/chroma_db
+          git diff --cached --quiet || git commit -m "chore: update post memory [skip ci]"
+          git push
