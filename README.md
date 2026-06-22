@@ -149,13 +149,6 @@ npm run dev
 Open your browser to `http://localhost:5173`. Click **"Get Today's Story"** and watch the AI agent work its magic!
 
 
-## 💸 Cost Breakdown
-- **RSS Feeds:** $0
-- **Sarvam AI API:** Very cheap / Free Tier limits
-- **ChromaDB:** $0 (runs locally)
-- **Dev.to & Mastodon:** $0
-- **React Frontend:** $0 (runs locally)
-
 ## 🛠 Tech Stack
 - **AI / LLMs:** Sarvam AI, LangGraph, sentence-transformers
 - **Database:** ChromaDB (Local Vector Store)
